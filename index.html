@@ -3,40 +3,41 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Document</title>
+    <title>JS Quiz</title>
+    <link rel="stylesheet" type="text/css" href="./Assets/style.css">
   </head>
   <body>
-    <div>
-      <a href="./scores.html">View Highscores</a>
-    </div>
+    <header>
+      <a id="highscores" href="./scores.html">View Highscores</a>
+      <div id="timer">Time: <span id="time-left">0</span></div>
+    </header>
 
-    <div class="timer">Time: <span id="time">0</span></div>
-
-    <h1>Coding Quiz Challenge</h1>
-    <p>
-      Lorem ipsum dolor sit amet consectetur adipisicing elit. Placeat
-      accusantium dolore temporibus ut ipsa reiciendis natus amet iste aliquid!
-      Eius ab dolores accusantium error nulla consectetur accusamus corrupti
-      reiciendis reprehenderit?
-    </p>
-
-    <button>Start Quiz</button>
-<!-- "class hidden" -->
-    <div>
-        <!-- Questions filled in w JS -->
-        <h2></h2>
-        <!-- Answers - filled in w JS -->
-        <div></div>
-    </div>
-
-    <div>
-        <h2>All Done!</h2>
-        <p>Your final score is <span></span></p>
+    <main id="opening-page">
+        <h1>Coding Quiz Challenge</h1>
         <p>
-            Enter Initials: <input type="text">
-            <button>Submit</button>
+        Try to answer the following code related questions within the time limit. Keep in mind that incorrect answers will penalize your time by 10 seconds!
+        </p>
+        <button id="start-btn">Start Quiz</button>
+    </main>
+
+    
+<!-- "class hidden" -->
+    <main id="question-box">
+        <!-- Questions filled in w JS -->
+        <h2 id="questions"></h2>
+        <!-- Answers - filled in w JS -->
+        <div id="answers"></div>
+    </main>
+
+    <main id="final-box">
+        <h2>All Done!</h2>
+        <p>Your final score is <span id="final-score"></span></p>
+        <p>
+            Enter Initials: <input id="initials" type="text">
+            <button id="submit-btn">Submit</button>
 
         </p>
-    </div>
+    </main>
+    <script src="./Assets/script.js"></script>
   </body>
 </html>
