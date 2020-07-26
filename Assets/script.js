@@ -9,6 +9,7 @@ let openingEl = document.getElementById("opening-page");
 let startBtn = document.getElementById("start-btn");
 //question and answers grabs and styling
 let questionBoxEl = document.getElementById("question-box");
+questionBoxEl.setAttribute("style","visibility:hidden")
 let questionsEl = document.getElementById("questions");
 let answersEL = document.getElementById("answers");
 let questionBtnA = document.createElement("button");
@@ -32,7 +33,8 @@ let clearBtn = document.getElementById("clear-btn");
 let timeRemaining = 90;
 let questionIndex = 0;
 let currentQuestion = 0;
-
+let rightAnswers = 0;
+let wrongAnswers = 0;
 
 // quiz questions obtained from https://www.geeksforgeeks.org/javascript-quiz-set-1/?ref=lbp and https://www.geeksforgeeks.org/javascript-quiz-set-2/?ref=lbp
 let questions = [
@@ -114,22 +116,40 @@ function startTimer() {
 }
 
 function showNextQuestion() {
+    if (questionBoxEl.style.visibility === 'hidden') {
+        questionBoxEl.style.visibility = 'visible';
+    }
     questionsEl.textContent = questions[currentQuestion].question;
-    questionBtnA.innerText = questions[currentQuestion].choices[0];
-    questionBtnB.innerText = questions[currentQuestion].choices[1];
-    questionBtnC.innerText = questions[currentQuestion].choices[2];
-    questionBtnD.innerText = questions[currentQuestion].choices[3];
+    questionBtnA.textContent = questions[currentQuestion].choices[0];
+    questionBtnB.textContent = questions[currentQuestion].choices[1];
+    questionBtnC.textContent = questions[currentQuestion].choices[2];
+    questionBtnD.textContent = questions[currentQuestion].choices[3];
+}
+
+function selectAnswer() {
+
 }
 
 // function stopQuiz() {
 
 // }
 
-
-
 startBtn.addEventListener("click", function() {
     startTimer();
 })
+questionBtnA.addEventListener("click", function() {
+    selectAnswer();
+})
+questionBtnB.addEventListener("click", function() {
+    selectAnswer();
+})
+questionBtnC.addEventListener("click", function() {
+    selectAnswer();
+})
+questionBtnD.addEventListener("click", function() {
+    selectAnswer();
+})
+
 
 // quiz questions obtained from https://www.geeksforgeeks.org/javascript-quiz-set-1/?ref=lbp and https://www.geeksforgeeks.org/javascript-quiz-set-2/?ref=lbp
 
