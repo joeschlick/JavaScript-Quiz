@@ -1,28 +1,41 @@
-const body = document.body;
 //index.html grabs
-const highScoreEl = document.getElementById("highscores");
-const timerEl = document.getElementById("timer");
-const timeLeftEl = document.getElementById("time-left");
-const openingEl = document.getElementById("opening-page");
-const startBtn = document.getElementById("start-btn");
-const questionBoxEl = document.getElementById("question-box");
-const questionsEl = document.getElementById("questions");
-const answersEL = document.getElementById("answers");
-const finalEl = document.getElementById("final-box");
-const fScoreEl = document.getElementById("final-score");
-const initialsEl = document.getElementById("initials");
-const submitBtn = document.getElementById("initials");
+let body = document.body;
+//header grabs
+let highScoreEl = document.getElementById("highscores");
+let timerEl = document.getElementById("timer");
+let timeLeftEl = document.getElementById("time-left");
+//opening page grabs
+let openingEl = document.getElementById("opening-page");
+let startBtn = document.getElementById("start-btn");
+//question and answers grabs and styling
+let questionBoxEl = document.getElementById("question-box");
+let questionsEl = document.getElementById("questions");
+let answersEL = document.getElementById("answers");
+let questionBtnA = document.createElement("button");
+let questionBtnB = document.createElement("button");
+let questionBtnC = document.createElement("button");
+let questionBtnD = document.createElement("button");
+answersEL.appendChild(questionBtnA);
+answersEL.appendChild(questionBtnB);
+answersEL.appendChild(questionBtnC);
+answersEL.appendChild(questionBtnD);
+//final page grabs
+let finalEl = document.getElementById("final-box");
+let fScoreEl = document.getElementById("final-score");
+let initialsEl = document.getElementById("initials");
+let submitBtn = document.getElementById("initials");
 //scores.html grabs
-const scoreList = document.getElementById("scores-list");
-const goBackBtn = document.getElementById("go-back-btn");
-const clearBtn = document.getElementById("clear-btn");
+let scoreList = document.getElementById("scores-list");
+let goBackBtn = document.getElementById("go-back-btn");
+let clearBtn = document.getElementById("clear-btn");
 
 let timeRemaining = 90;
 let questionIndex = 0;
+let currentQuestion = 0;
 
 
 // quiz questions obtained from https://www.geeksforgeeks.org/javascript-quiz-set-1/?ref=lbp and https://www.geeksforgeeks.org/javascript-quiz-set-2/?ref=lbp
-const questions = [
+let questions = [
   {
     question:
       "1. What is the HTML tag under which one can write the JavaScript code?",
@@ -83,21 +96,40 @@ const questions = [
   },
 ];
 
+
+
 function startTimer() {
+    openingEl.setAttribute("style","visibility:hidden")
     timeLeftEl.textContent = timeRemaining;
     let timerInterval = setInterval(() => {
         timeRemaining--;
         timeLeftEl.textContent = timeRemaining;
 
-        // if (timeRemaining === 0) {
-        //     clearInterval(timerInterval);
-        //     stopQuiz();
-        // }
+        if (timeRemaining === 0) {
+            clearInterval(timerInterval);
+            // stopQuiz();
+        }
     }, 1000);
-    // showNextQuestion();
+    showNextQuestion();
 }
 
-startTimer();
+function showNextQuestion() {
+    questionsEl.textContent = questions[currentQuestion].question;
+    questionBtnA.innerText = questions[currentQuestion].choices[0];
+    questionBtnB.innerText = questions[currentQuestion].choices[1];
+    questionBtnC.innerText = questions[currentQuestion].choices[2];
+    questionBtnD.innerText = questions[currentQuestion].choices[3];
+}
+
+// function stopQuiz() {
+
+// }
+
+
+
+startBtn.addEventListener("click", function() {
+    startTimer();
+})
 
 // quiz questions obtained from https://www.geeksforgeeks.org/javascript-quiz-set-1/?ref=lbp and https://www.geeksforgeeks.org/javascript-quiz-set-2/?ref=lbp
 
