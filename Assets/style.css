@@ -8,9 +8,10 @@ body {
     color: blue;
 }
 
-#opening-page {
+main {
     margin: auto;
     text-align: center;
     width: 60%;
     margin-top: 100px;
 }
+

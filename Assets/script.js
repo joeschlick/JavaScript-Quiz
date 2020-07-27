@@ -9,19 +9,22 @@ let openingEl = document.getElementById("opening-page");
 let startBtn = document.getElementById("start-btn");
 //question and answers grabs and styling
 let questionBoxEl = document.getElementById("question-box");
-questionBoxEl.setAttribute("style","visibility:hidden")
+questionBoxEl.setAttribute("style","display:none");
 let questionsEl = document.getElementById("questions");
 let answersEL = document.getElementById("answers");
 let questionBtnA = document.createElement("button");
 let questionBtnB = document.createElement("button");
 let questionBtnC = document.createElement("button");
 let questionBtnD = document.createElement("button");
+let rightWrongEl = document.createElement("div");
 answersEL.appendChild(questionBtnA);
 answersEL.appendChild(questionBtnB);
 answersEL.appendChild(questionBtnC);
 answersEL.appendChild(questionBtnD);
+questionBoxEl.appendChild(rightWrongEl);
 //final page grabs
 let finalEl = document.getElementById("final-box");
+finalEl.setAttribute("style","display:none");
 let fScoreEl = document.getElementById("final-score");
 let initialsEl = document.getElementById("initials");
 let submitBtn = document.getElementById("initials");
@@ -47,7 +50,7 @@ let questions = [
         "C. <script>", 
         "D. <js>"
     ],
-    answer: 2,
+    answer: "C. <script>",
   },
 
   {
@@ -59,7 +62,7 @@ let questions = [
       "C. <script ref=”geek.js”>",
       "D. alert(“GeeksforGeeks”);",
     ],
-    answer: 3,
+    answer: "D. alert(“GeeksforGeeks”);",
   },
 
   {
@@ -71,7 +74,7 @@ let questions = [
       "C. msgbox(“GeeksforGeeks”);",
       "D. <script name=”geek.js”>",
     ],
-    answer: 0,
+    answer: "A. <script src=”geek.js”>",
   },
 
   {
@@ -82,7 +85,7 @@ let questions = [
         "C. program", 
         "D. short"
     ],
-    answer: 2,
+    answer: "C. program", 
   },
 
   {
@@ -94,14 +97,48 @@ let questions = [
       "C. function := Geekfunc()",
       "D. function : Geekfunc()",
     ],
-    answer: 1,
+    answer: "B. function Geekfunc()",
+  },
+
+  {
+    question:
+      "6. What is the correct syntax for adding comments in JavaScript?",
+    choices: [
+      "A. <!–This is a comment–&gt",
+      "B. //This is a comment",
+      "C. –This is a comment",
+      "D. **This is a comment**",
+    ],
+    answer: "B. //This is a comment",
+  },
+
+  {
+    question:
+      "7. What is the JavaScript syntax for printing values in Console?",
+    choices: [
+      "A. print(5)",
+      "B. console.log(5);",
+      "C. console.print(5);",
+      "D. print.console(5);",
+    ],
+    answer: "B. console.log(5);",
+  },
+
+  {
+    question:
+      "8. How do you initialize an array in JavaScript?",
+    choices: [
+      "A. var Geeks= “Geek1”, “Geek2”, “Geek3”",
+      "B. var Geeks=(1:Geek1, 2:Geek2, 3:Geek3)",
+      "C. var Geeks=(1=Geek1, 2=Geek2, 3=Geek3)",
+      "D. var Geeks=[“Geek1”, “Geek2”, “Geek3”]",
+    ],
+    answer: "D. var Geeks=[“Geek1”, “Geek2”, “Geek3”]",
   },
 ];
 
-
-
 function startTimer() {
-    openingEl.setAttribute("style","visibility:hidden")
+    openingEl.setAttribute("style","display:none")
     timeLeftEl.textContent = timeRemaining;
     let timerInterval = setInterval(() => {
         timeRemaining--;
@@ -109,15 +146,16 @@ function startTimer() {
 
         if (timeRemaining === 0) {
             clearInterval(timerInterval);
-            // stopQuiz();
+            stopQuiz();
+            alert("Time's Up!");
         }
     }, 1000);
     showNextQuestion();
 }
 
 function showNextQuestion() {
-    if (questionBoxEl.style.visibility === 'hidden') {
-        questionBoxEl.style.visibility = 'visible';
+    if (questionBoxEl.style.display === 'none') {
+        questionBoxEl.style.display = 'block';
     }
     questionsEl.textContent = questions[currentQuestion].question;
     questionBtnA.textContent = questions[currentQuestion].choices[0];
@@ -126,29 +164,42 @@ function showNextQuestion() {
     questionBtnD.textContent = questions[currentQuestion].choices[3];
 }
 
-function selectAnswer() {
+answersEL.addEventListener("click", function(event) {
+    let element = event.target;
+  
+    if (element.matches("button")) {
+      element = element.textContent;
+    }
+    if (element == questions[currentQuestion].answer) {
+      rightWrongEl.textContent = "That's Right!";
+      rightAnswers++;
+    }
+    else {
+      rightWrongEl.textContent = "Wrong! 10 Second Penalty!";
+      timeRemaining = timeRemaining - 10;
+      timeLeftEl.textContent = timeRemaining;
+      wrongAnswers++;
+    }
+    if (currentQuestion < questions.length - 1) {
+      currentQuestion++;
+      showNextQuestion();
+    }
+    else {
+      clearInterval(timeRemaining);
+      stopQuiz();
+      fScoreEl.textContent = rightAnswers
+    }
+})
 
+function stopQuiz() {
+  questionBoxEl.style.display = 'none'
+  finalEl.style.display = 'block'
 }
 
-// function stopQuiz() {
-
-// }
-
-startBtn.addEventListener("click", function() {
+startBtn.addEventListener("click", function(event) {
     startTimer();
 })
-questionBtnA.addEventListener("click", function() {
-    selectAnswer();
-})
-questionBtnB.addEventListener("click", function() {
-    selectAnswer();
-})
-questionBtnC.addEventListener("click", function() {
-    selectAnswer();
-})
-questionBtnD.addEventListener("click", function() {
-    selectAnswer();
-})
+
 
 
 // quiz questions obtained from https://www.geeksforgeeks.org/javascript-quiz-set-1/?ref=lbp and https://www.geeksforgeeks.org/javascript-quiz-set-2/?ref=lbp
