@@ -28,16 +28,13 @@ finalEl.setAttribute("style", "display:none");
 let fScoreEl = document.getElementById("final-score");
 let initialsEl = document.getElementById("initials");
 let submitBtn = document.getElementById("submit-btn");
-//scores.html grabs
-let scoreList = document.getElementById("scores-list");
-let goBackBtn = document.getElementById("go-back-btn");
-let clearBtn = document.getElementById("clear-btn");
 
 let timeRemaining = 90;
 let questionIndex = 0;
 let currentQuestion = 0;
 let rightAnswers = 0;
 let wrongAnswers = 0;
+let timerInterval;
 
 // quiz questions obtained from https://www.geeksforgeeks.org/javascript-quiz-set-1/?ref=lbp and https://www.geeksforgeeks.org/javascript-quiz-set-2/?ref=lbp
 let questions = [
@@ -129,7 +126,7 @@ let questions = [
 function startTimer() {
   openingEl.setAttribute("style", "display:none");
   timeLeftEl.textContent = timeRemaining;
-  let timerInterval = setInterval(() => {
+  timerInterval = setInterval(() => {
     timeRemaining--;
     timeLeftEl.textContent = timeRemaining;
 
@@ -173,7 +170,7 @@ answersEL.addEventListener("click", function (event) {
     showNextQuestion();
   } else {
     //Not working!! Need to figure out how to access timeInterval from here
-    clearInterval(timeRemaining);
+    clearInterval(timerInterval);
     stopQuiz();
     fScoreEl.textContent = rightAnswers;
   }
@@ -184,43 +181,23 @@ function stopQuiz() {
   finalEl.style.display = "block";
 }
 
-let quizResult = {};
-let highScores = [];
 
-// init();
-
-// function renderScores() {
-//   scoreList.innerHTML = "";
-
-//   for (var i = 0; i < highScores.length; i++) {
-//     let highScore = highScores[i];
-
-//     let li = document.createElement("li");
-//     li.textContent = highScore;
-//     li.setAttribute("data-index", i);
-
-//     scoreList.appendChild(li);
-//   }
-// }
-
-submitBtn.addEventListener("submit", function (event) {
-  event.preventDefault();
+function saveHighScore() {
 
   let initials = initialsEl.value.trim();
-  let finalScore = rightAnswers;
 
-  if (initials === "") {
-    return;
+  if (initials !== "") {
+    let highScores = JSON.parse(window.localStorage.getItem("highScores")) || [];
+    let quizResult = { initials: initials, score: rightAnswers };
+    highScores.push(quizResult);
+    window.localStorage.setItem("highScores", JSON.stringify(highScores));
+    initialsEl.value = "";
   }
+};
 
-  quizResult = { player: initials, score: finalScore };
-  highscoreList.push(quizResult);
-  initialsEl.value = "";
-});
 
-startBtn.addEventListener("click", function (event) {
-  startTimer();
-});
+startBtn.onclick = startTimer
+submitBtn.onclick = saveHighScore;
 
 // quiz questions obtained from https://www.geeksforgeeks.org/javascript-quiz-set-1/?ref=lbp and https://www.geeksforgeeks.org/javascript-quiz-set-2/?ref=lbp
 
