@@ -13,15 +13,15 @@ questionBoxEl.setAttribute("style", "display:none");
 let questionsEl = document.getElementById("questions");
 let answersEL = document.getElementById("answers");
 let questionBtnA = document.createElement("button");
-questionBtnA.setAttribute("class", "questionButton")
+questionBtnA.setAttribute("class", "questionButton");
 let questionBtnB = document.createElement("button");
-questionBtnB.setAttribute("class", "questionButton")
+questionBtnB.setAttribute("class", "questionButton");
 let questionBtnC = document.createElement("button");
-questionBtnC.setAttribute("class", "questionButton")
+questionBtnC.setAttribute("class", "questionButton");
 let questionBtnD = document.createElement("button");
-questionBtnD.setAttribute("class", "questionButton")
+questionBtnD.setAttribute("class", "questionButton");
 let rightWrongEl = document.createElement("div");
-rightWrongEl.setAttribute("class", "rightWrong")
+rightWrongEl.setAttribute("class", "rightWrong");
 answersEL.appendChild(questionBtnA);
 answersEL.appendChild(questionBtnB);
 answersEL.appendChild(questionBtnC);
@@ -190,16 +190,15 @@ function saveHighScore() {
   let initials = initialsEl.value.trim();
 
   if (initials !== "") {
-    let highScores = JSON.parse(window.localStorage.getItem("highScores")) || [];
+    let highScores =
+      JSON.parse(window.localStorage.getItem("highScores")) || [];
     let quizResult = { initials: initials, score: rightAnswers };
     highScores.push(quizResult);
     window.localStorage.setItem("highScores", JSON.stringify(highScores));
     initialsEl.value = "";
   }
-};
+}
 
 // Button functions
-startBtn.onclick = startTimer
+startBtn.onclick = startTimer;
 submitBtn.onclick = saveHighScore;
-
-
