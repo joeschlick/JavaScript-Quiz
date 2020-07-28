@@ -7,16 +7,21 @@ let timeLeftEl = document.getElementById("time-left");
 //opening page grabs
 let openingEl = document.getElementById("opening-page");
 let startBtn = document.getElementById("start-btn");
-//question and answers grabs and styling
+//question and answer button grabs and styling
 let questionBoxEl = document.getElementById("question-box");
 questionBoxEl.setAttribute("style", "display:none");
 let questionsEl = document.getElementById("questions");
 let answersEL = document.getElementById("answers");
 let questionBtnA = document.createElement("button");
+questionBtnA.setAttribute("class", "questionButton")
 let questionBtnB = document.createElement("button");
+questionBtnB.setAttribute("class", "questionButton")
 let questionBtnC = document.createElement("button");
+questionBtnC.setAttribute("class", "questionButton")
 let questionBtnD = document.createElement("button");
+questionBtnD.setAttribute("class", "questionButton")
 let rightWrongEl = document.createElement("div");
+rightWrongEl.setAttribute("class", "rightWrong")
 answersEL.appendChild(questionBtnA);
 answersEL.appendChild(questionBtnB);
 answersEL.appendChild(questionBtnC);
@@ -28,7 +33,7 @@ finalEl.setAttribute("style", "display:none");
 let fScoreEl = document.getElementById("final-score");
 let initialsEl = document.getElementById("initials");
 let submitBtn = document.getElementById("submit-btn");
-
+//global vars
 let timeRemaining = 90;
 let questionIndex = 0;
 let currentQuestion = 0;
@@ -122,7 +127,7 @@ let questions = [
     answer: "D. var Geeks=[“Geek1”, “Geek2”, “Geek3”]",
   },
 ];
-
+// Start timer and game
 function startTimer() {
   openingEl.setAttribute("style", "display:none");
   timeLeftEl.textContent = timeRemaining;
@@ -133,12 +138,12 @@ function startTimer() {
     if (timeRemaining === 0) {
       clearInterval(timerInterval);
       stopQuiz();
-      alert("Time's Up!");
+      alert("Time's Up! Please Refresh the Page and Try Again!");
     }
   }, 1000);
   showNextQuestion();
 }
-
+// Shows questions and answer choices
 function showNextQuestion() {
   if (questionBoxEl.style.display === "none") {
     questionBoxEl.style.display = "block";
@@ -149,7 +154,7 @@ function showNextQuestion() {
   questionBtnC.textContent = questions[currentQuestion].choices[2];
   questionBtnD.textContent = questions[currentQuestion].choices[3];
 }
-
+// Code to select answers
 answersEL.addEventListener("click", function (event) {
   let element = event.target;
 
@@ -169,21 +174,19 @@ answersEL.addEventListener("click", function (event) {
     currentQuestion++;
     showNextQuestion();
   } else {
-    //Not working!! Need to figure out how to access timeInterval from here
     clearInterval(timerInterval);
     stopQuiz();
     fScoreEl.textContent = rightAnswers;
   }
 });
-
+// Clear Q and A section and brings up final page
 function stopQuiz() {
   questionBoxEl.style.display = "none";
   finalEl.style.display = "block";
 }
 
-
+// Saves initials and scores to local storage
 function saveHighScore() {
-
   let initials = initialsEl.value.trim();
 
   if (initials !== "") {
@@ -195,72 +198,8 @@ function saveHighScore() {
   }
 };
 
-
+// Button functions
 startBtn.onclick = startTimer
 submitBtn.onclick = saveHighScore;
 
-// quiz questions obtained from https://www.geeksforgeeks.org/javascript-quiz-set-1/?ref=lbp and https://www.geeksforgeeks.org/javascript-quiz-set-2/?ref=lbp
 
-// 1. What is the HTML tag under which one can write the JavaScript code?
-// A) <javascript>
-// B) <scripted>
-// C) <script>
-// D) <js>
-// Ans: C
-
-// 2. Which of the following is the correct syntax to display “GeeksforGeeks” in an alert box using JavaScript?
-// A. alertbox(“GeeksforGeeks”);
-// B. msg(“GeeksforGeeks”);
-// C. msgbox(“GeeksforGeeks”);
-// D. alert(“GeeksforGeeks”);
-// Ans: D
-
-// 3. What is the correct syntax for referring to an external script called “geek.js”?
-// A. <script src=”geek.js”>
-// B. <script href=”geek.js”>
-// C. <script ref=”geek.js”>
-// D. <script name=”geek.js”>
-// Ans: A
-
-// 4. Which of the following is not a reserved word in JavaScript?
-// A. interface
-// B. throws
-// C. program
-// D. short
-// Ans: C
-
-// 5. What is the syntax for creating a function in JavaScript named as Geekfunc?
-// A) function = Geekfunc()
-// B) function Geekfunc()
-// C) function := Geekfunc()
-// D) function : Geekfunc()
-// Ans: Option B
-
-// 7. How to write an ‘if’ statement for executing some code.
-// If “i” is NOT equal to 5?
-// A) if(i<>5)
-// B) if i<>5
-// C) if(i!=5)
-// D) if i!=5
-// Ans: C
-
-// 8. What is the correct syntax for adding comments in JavaScript?
-// A) <!–This is a comment–&gt
-// B) //This is a comment
-// C) –This is a comment
-// D) **This is a comment**
-// Ans: B
-
-// // 9. What is the JavaScript syntax for printing values in Console?
-// A) print(5)
-// B) console.log(5);
-// C) console.print(5);
-// D) print.console(5);
-// Ans: Option B
-
-// 10. How to initialize an array in JavaScript?
-// A) var Geeks= “Geek1”, “Geek2”, “Geek3”
-// B) var Geeks=(1:Geek1, 2:Geek2, 3:Geek3)
-// C) var Geeks=(1=Geek1, 2=Geek2, 3=Geek3)
-// D) var Geeks=[“Geek1”, “Geek2”, “Geek3”]
-// Ans: D

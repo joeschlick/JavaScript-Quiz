@@ -1,3 +1,4 @@
+// Get high scores from local storage and print to list
 function printHighScores() {
     let highScores = JSON.parse(window.localStorage.getItem("highScores")) || [];
     highScores.sort(function(a, b){
@@ -11,7 +12,7 @@ function printHighScores() {
         olEl.appendChild(liTag);
     })
 }
-
+// Clear score list
 function clearHighScores() {
     window.localStorage.removeItem("highScores");
     window.location.reload();

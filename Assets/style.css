@@ -7,14 +7,14 @@ body {
 }
 /* Global button look */
 button {
-    background-color: coral;
-    font-size: large;
-    margin-top: 30px;
-  }
-  
-  button:hover {
-    background-color: peachpuff;
-  }
+  background-color: coral;
+  font-size: large;
+  margin-top: 30px;
+}
+
+button:hover {
+  background-color: peachpuff;
+}
 /* header */
 a {
   color: white;
@@ -46,15 +46,23 @@ section {
 }
 
 h1 {
-    font-size: 40px;
-  }
+  font-size: 40px;
+}
 
 p {
   font-size: 19px;
 }
 /* Questions and answers */
+#question-box {
+  margin: auto;
+  text-align: center;
+  width: 60%;
+  margin-top: 150px;
+}
+
 #questions {
   text-align: left;
+  font-size: 30px;
 }
 
 #answers {

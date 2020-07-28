@@ -4,41 +4,42 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>JS Quiz</title>
-    <link rel="stylesheet" type="text/css" href="./Assets/style.css">
+    <link rel="stylesheet" type="text/css" href="./Assets/style.css" />
   </head>
+  <!-- Body -->
   <body>
+<!-- Header -->
     <header>
       <a id="highscores" href="./scores.html">View Highscores</a>
       <div id="timer">Time: <span id="time-left">0</span></div>
     </header>
-
+<!-- Main content -->
     <main id="opening-page">
-        <h1>Coding Quiz Challenge</h1>
-        <p>
-        Try to answer the following code related questions within the time limit. Keep in mind that incorrect answers will penalize your time by 10 seconds!
-        </p>
-        <button id="start-btn">Start Quiz</button>
+      <h1>Coding Quiz Challenge</h1>
+      <p>
+        Try to answer the following code related questions within the time
+        limit. <br /><br />
+        Keep in mind that incorrect answers will penalize your time by 10
+        seconds!
+      </p>
+      <button id="start-btn">Start Quiz</button>
     </main>
-
-    
-<!-- "class hidden" -->
-    <main id="question-box">
-        <!-- Questions filled in w JS -->
-        <h2 id="questions"></h2>
-        <!-- Answers - filled in w JS -->
-        <div id="answers"></div>
-    </main>
-
-<!-- Final page - hidden at start -->
-    <main id="final-box">
-        <h2>All Done!</h2>
-        <p>Your final score is <span id="final-score"></span></p>
-        <p>
-            Enter Initials: <input id="initials" type="text">
-            <button id="submit-btn">Submit</button>
-
-        </p>
-    </main>
+    <!-- Questions and answers - hidden at start-->
+    <div id="question-box">
+      <!-- Questions filled in w JS -->
+      <p id="questions"></p>
+      <!-- Answers - filled in w JS -->
+      <div id="answers"></div>
+    </div>
+    <!-- Final page - hidden at start -->
+    <section id="final-box">
+      <h2 id="final-head">All Done!</h2>
+      <p>Your final score is <span id="final-score"></span></p>
+      <p>
+        Enter Initials: <input id="initials" type="text" />
+        <button id="submit-btn">Submit</button>
+      </p>
+    </section>
     <script src="./Assets/script.js"></script>
   </body>
 </html>
